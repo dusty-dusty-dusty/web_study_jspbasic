@@ -37,7 +37,8 @@
 	vo.setEname(user);
 	vo.setEmpno( Integer.parseInt(pass));
 	
-	EmpDao dao = new EmpDao();	
+	//EmpDao dao = new EmpDao();
+	EmpDao dao = EmpDao.getInstance();
 	
 	// user, password가 같을 때 로그인 성공, 그렇지 않으면 로그인 실패
 	if( dao.loginCheck(vo) ) {

@@ -13,7 +13,8 @@
 	vo.setJob (request.getParameter("job"));
 	vo.setSal(Integer.parseInt(request.getParameter("sal")));
 	//2. 모델측 DAO의 insert()로 위의 VO전송
-	EmpDao dao = new EmpDao();
+	EmpDao dao = EmpDao.getInstance();
+	//EmpDao dao = new EmpDao();
 	dao.insert(vo);
 %>
 

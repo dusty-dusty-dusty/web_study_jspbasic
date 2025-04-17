@@ -10,16 +10,22 @@ public class EmpDao{
 	static String user 		= "scott";
 	static String pass		= "tiger";
 	
+	private EmpDao() throws Exception{ //생성자함수를 private으로 바꾸면 다른곳에서 생성을 못함 ->같은 클래스 안에서만 부를수있음 
+	//1. 드라이버 로딩
+		Class.forName(driver);
+		   }
+
+	//싱글톤 개념의 기본 : 메모리에 단 하나 올리겠다 
+	static EmpDao dao = null; 
+	public static EmpDao getInstance() throws Exception { //static 
+	if(dao == null) dao = new EmpDao(); //dao가 null인경우에만 dao에 EmpDAO를 생성 
+	return dao;
+		   }
 	
 	Connection con = null;
 	PreparedStatement ps =null;
 	ResultSet rs = null;
 
-	public EmpDao() throws Exception {
-		//1 드라이버 로딩
-		Class.forName(driver);		
-	}
-	
 	public void insert(EmpVO vo) throws Exception {
 		con = DriverManager.getConnection(url, user, pass);
 		//2~7
@@ -59,8 +65,6 @@ public class EmpDao{
 		ps.setString(1, vo.getEname());
 		ps.setInt(2, vo.getEmpno());
 		//5.
-		ResultSet rs = ps.executeQuery();
-		//6.결과처리
 		if( rs.next()) {
 			check = true;
 		}
@@ -101,6 +105,10 @@ public class EmpDao{
 			//7닫기
 			try {con.close();} catch(Exception ex) {} 
 		} 
+		
+	
+		
+		
 	}
 	
 	

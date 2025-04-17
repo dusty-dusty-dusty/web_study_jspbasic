@@ -5,7 +5,8 @@
     
 <%
 	int empno = Integer.parseInt(request.getParameter("sabun"));
-	EmpDao dao = new EmpDao();
+	//EmpDao dao = new EmpDao();
+	EmpDao dao = EmpDao.getInstance();
 	EmpVO  result = dao.selectByPK(empno);
 
 %>    
